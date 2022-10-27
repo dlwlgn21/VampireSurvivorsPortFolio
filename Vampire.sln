@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Vampire", "Vampire.vcxproj", "{1ED650A2-113E-4A41-81D2-2FB24CC7803A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1ED650A2-113E-4A41-81D2-2FB24CC7803A}.Debug|x64.ActiveCfg = Debug|x64
+		{1ED650A2-113E-4A41-81D2-2FB24CC7803A}.Debug|x64.Build.0 = Debug|x64
+		{1ED650A2-113E-4A41-81D2-2FB24CC7803A}.Debug|x86.ActiveCfg = Debug|Win32
+		{1ED650A2-113E-4A41-81D2-2FB24CC7803A}.Debug|x86.Build.0 = Debug|Win32
+		{1ED650A2-113E-4A41-81D2-2FB24CC7803A}.Release|x64.ActiveCfg = Release|x64
+		{1ED650A2-113E-4A41-81D2-2FB24CC7803A}.Release|x64.Build.0 = Release|x64
+		{1ED650A2-113E-4A41-81D2-2FB24CC7803A}.Release|x86.ActiveCfg = Release|Win32
+		{1ED650A2-113E-4A41-81D2-2FB24CC7803A}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {985FA0D9-3456-4C6D-8F64-0FC277275717}
+	EndGlobalSection
+EndGlobal
