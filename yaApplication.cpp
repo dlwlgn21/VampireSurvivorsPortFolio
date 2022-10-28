@@ -30,6 +30,8 @@ namespace ya
 		SceneManager::Tick();
 		SceneManager::Render(mWindowData.hdc);
 
+
+
 		Input::Render(mWindowData.hdc);
 		Time::Render(mWindowData.hdc);
 	}

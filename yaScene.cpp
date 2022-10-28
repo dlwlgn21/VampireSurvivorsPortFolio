@@ -12,10 +12,7 @@ namespace ya
 	{
 		for (auto* object : mObjects)
 		{
-			if (object == nullptr)
-			{
-				continue;
-			}
+			if (object == nullptr) { continue; }
 			delete object;
 		}
 	}
@@ -30,16 +27,16 @@ namespace ya
 
 	void Scene::Tick()
 	{
-		for (auto* object : mObjects)
+		for (size_t i = 0; i < mObjects.size(); i++)
 		{
-			object->Tick();
+			mObjects[i]->Tick();
 		}
 	}
 	void Scene::Render(HDC hdc)
 	{
-		for (auto* object : mObjects)
+		for (size_t i = 0; i < mObjects.size(); i++)
 		{
-			object->Render(hdc);
+			mObjects[i]->Render(hdc);
 		}
 	}
 	void Scene::AddGameObject(GameObject* object)

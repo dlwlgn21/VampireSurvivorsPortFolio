@@ -1,5 +1,10 @@
 #include "yaPlayer.h"
 #include "yaTime.h"
+#include "yaInput.h"
+#include "yaMissile.h"
+#include "yaSceneManager.h"
+#include "yaScene.h"
+#include "yaMeteo.h"
 
 namespace ya
 {
@@ -13,28 +18,41 @@ namespace ya
 	Player::~Player()
 	{
 	}
-	void Player::Initialize()
-	{
-	}
+
 	void Player::Tick()
 	{
-		if (GetAsyncKeyState('W') & 0x8000)
+		if (IS_KEY_PRESSED(eKeyCode::W))
 		{
 			mPos.y -= mSpeed * Time::DeltaTime();
 		}
-		if (GetAsyncKeyState('S') & 0x8000)
+		if (IS_KEY_PRESSED(eKeyCode::S))
 		{
 			mPos.y += mSpeed * Time::DeltaTime();
 		}
-		if (GetAsyncKeyState('A') & 0x8000)
+		if (IS_KEY_PRESSED(eKeyCode::A))
 		{
 			mPos.x -= mSpeed * Time::DeltaTime();
 		}
-		if (GetAsyncKeyState('D') & 0x8000)
+		if (IS_KEY_PRESSED(eKeyCode::D))
 		{
 			mPos.x += mSpeed * Time::DeltaTime();
 		}
+		if (IS_KEY_DOWN(eKeyCode::SPACE))
+		{
+			Missile* missile = new Missile();
+			Scene* currScene = SceneManager::GetCurrentScene();
+			currScene->AddGameObject(missile);
+			missile->SetPos((GetPos() + (mScale / 2.0f)) - (missile->GetScale() / 2.0f));
+		}
+
+		if (IS_KEY_DOWN(eKeyCode::Z))
+		{
+			Meteo* meteo = new Meteo();
+			Scene* currScene = SceneManager::GetCurrentScene();
+			currScene->AddGameObject(meteo);
+		}
 	}
+
 	void Player::Render(HDC hdc)
 	{
 		Rectangle(hdc,

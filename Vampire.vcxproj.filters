@@ -34,6 +34,9 @@
     <Filter Include="HighLevelInterface">
       <UniqueIdentifier>{4e8286e0-093b-4255-abea-30f0382089ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{62a5984e-18af-4167-bcba-76831e3c6871}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -47,15 +50,6 @@
     </ClInclude>
     <ClInclude Include="Vampire.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Common.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Maths.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="def.h">
-      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="yaEntity.h">
       <Filter>Engine</Filter>
@@ -82,6 +76,27 @@
       <Filter>HighLevelInterface</Filter>
     </ClInclude>
     <ClInclude Include="yaInput.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="def.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Maths.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMissile.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMeteo.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMeteoManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
@@ -114,6 +129,15 @@
       <Filter>HighLevelInterface</Filter>
     </ClCompile>
     <ClCompile Include="yaInput.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMissile.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMeteo.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMeteoManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>

@@ -8,7 +8,6 @@ namespace ya
 		Player();
 		virtual ~Player();
 
-		void Initialize() override;
 		void Tick() override;
 		void Render(HDC hdc) override;
 
