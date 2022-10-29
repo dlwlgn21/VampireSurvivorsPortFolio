@@ -16,21 +16,21 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-struct Pos
-{
-    int x;
-    int y;
-
-    Pos& operator+=(const Pos other)
-    {
-        x += other.x;
-        y += other.y;
-
-        return *this;
-    }
-};
-
-typedef Pos Size;
+//struct Pos
+//{
+//    int x;
+//    int y;
+//
+//    Pos& operator+=(const Pos other)
+//    {
+//        x += other.x;
+//        y += other.y;
+//
+//        return *this;
+//    }
+//};
+//
+//typedef Pos Size;
 ya::Application& app = ya::Application::GetInstance();
 
 
@@ -43,6 +43,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    // _CrtSetBreakAlloc(225);
+
 
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_VAMPIRE, szWindowClass, MAX_LOADSTRING);
@@ -110,8 +112,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     hInst = hInstance;
 
     WindowData windowData = {};
-    windowData.width = 1920;
-    windowData.height = 1080;
+    windowData.width = 1024;
+    windowData.height = 600;
 
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
@@ -167,10 +169,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
 
-        HBRUSH hClearBrush = CreateSolidBrush(RGB(100, 100, 100));
+        HBRUSH hClearBrush = static_cast<HBRUSH>(GetStockObject(GRAY_BRUSH));
         HBRUSH hPrevClearBrush = static_cast<HBRUSH>(SelectObject(hdc, hClearBrush));
 
-        Rectangle(hdc, -1, -1, 1921, 1081);
+        Rectangle(hdc, 0, 0, 1920, 1080);
         SelectObject(hdc, hPrevClearBrush);
         EndPaint(hWnd, &ps);
 

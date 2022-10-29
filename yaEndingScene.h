@@ -1,14 +1,14 @@
 #pragma once
 #include "yaScene.h"
-#include "yaImage.h"
+
 namespace ya
 {
-	class LogoScene : public Scene
+	class EndingScene : public Scene
 	{
 
 	public:
-		LogoScene();
-		virtual ~LogoScene();
+		EndingScene();
+		virtual ~EndingScene();
 
 		void Initialize() override;
 		void Tick() override;
@@ -18,7 +18,5 @@ namespace ya
 		void Exit() override;
 	private:
 	};
-
 }
-
 

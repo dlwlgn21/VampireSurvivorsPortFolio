@@ -1,24 +1,22 @@
 #pragma once
 #include "yaScene.h"
-#include "yaImage.h"
+
 namespace ya
 {
-	class LogoScene : public Scene
+	class TitleScene : public Scene
 	{
 
 	public:
-		LogoScene();
-		virtual ~LogoScene();
+		TitleScene();
+		virtual ~TitleScene();
 
 		void Initialize() override;
 		void Tick() override;
 		void Render(HDC hdc) override;
-
 		void Enter() override;
 		void Exit() override;
+
 	private:
 	};
-
 }
-
 

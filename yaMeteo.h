@@ -23,6 +23,7 @@ namespace ya
 		int mRandomPosX;
 		int mRandomPosY;
 		HBRUSH mBrush;
+		HPEN mPen;
 	};
 }
 

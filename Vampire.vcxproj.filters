@@ -37,6 +37,18 @@
     <Filter Include="Common">
       <UniqueIdentifier>{62a5984e-18af-4167-bcba-76831e3c6871}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{d6331151-e06a-430a-bc58-77fa60695568}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Base">
+      <UniqueIdentifier>{846a9c9f-a4bb-4a86-b5c6-1a66e6db809d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{2b3d29b1-9e10-4cb8-a3b5-272d8a4925fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Base">
+      <UniqueIdentifier>{c8adbd3c-0dd0-4ca6-9836-faca0c2755fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -62,9 +74,6 @@
     </ClInclude>
     <ClInclude Include="yaTime.h">
       <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="yaLogoScene.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="yaScene.h">
       <Filter>Scene\Base</Filter>
@@ -99,6 +108,45 @@
     <ClInclude Include="yaMeteoManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="yaResource.h">
+      <Filter>Resource\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="yaImage.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="yaLogoScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="yaResources.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="yaCollider.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="yaAnimator.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="yaComponent.h">
+      <Filter>Component\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="yaEndingScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPlayScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="yaTitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBgImageObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMonster.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="yaCollisionManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -115,9 +163,6 @@
     </ClCompile>
     <ClCompile Include="yaTime.cpp">
       <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="yaLogoScene.cpp">
-      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="yaScene.cpp">
       <Filter>Scene\Base</Filter>
@@ -138,6 +183,48 @@
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="yaMeteoManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="yaResource.cpp">
+      <Filter>Resource\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="yaImage.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="yaLogoScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="yaResources.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Maths.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCollider.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="yaAnimator.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="yaComponent.cpp">
+      <Filter>Component\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="yaEndingScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPlayScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="yaTitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBgImageObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMonster.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCollisionManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>

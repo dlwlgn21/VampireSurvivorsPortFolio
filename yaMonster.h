@@ -1,22 +1,22 @@
 #pragma once
 #include "yaGameObject.h"
+
 namespace ya
 {
 	class Image;
-	class Player final : public GameObject
+	class Monster : public GameObject
 	{
 	public:
-		Player();
-		virtual ~Player();
+		Monster();
+		virtual ~Monster();
 
 		void Tick() override;
 		void Render(HDC hdc) override;
 
 	private:
-		float mSpeed;
 		HPEN mPen;
 		HBRUSH mBrush;
-		Image* mImage;
+		Image* mpImage;
 	};
 
 }

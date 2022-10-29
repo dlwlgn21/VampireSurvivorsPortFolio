@@ -11,6 +11,7 @@ namespace ya
 		, mRandomPosX(0)
 		, mRandomPosY(0)
 		, mBrush(CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256)))
+		, mPen(CreatePen(PS_DASHDOTDOT, 3, RGB(rand() % 256, rand() % 256, rand() % 256)))
 	{
 		SetPos({0.0f, 0.0f});
 		SetScale({static_cast<float>(WIDTH), static_cast<float>(HEIGHT)});
@@ -21,6 +22,7 @@ namespace ya
 		, mRandomPosX(randomX)
 		, mRandomPosY(randomY)
 		, mBrush(CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256)))
+		, mPen(CreatePen(PS_DASHDOTDOT, 3, RGB(rand() % 256, rand() % 256, rand() % 256)))
 	{
 		SetPos({ static_cast<float>(randomX), static_cast<float>(randomY) });
 		SetScale({ static_cast<float>(WIDTH), static_cast<float>(HEIGHT)});
@@ -31,9 +33,8 @@ namespace ya
 	}
 	void Meteo::Render(HDC hdc)
 	{
-		HPEN pen = CreatePen(PS_DASHDOT, 2, RGB(0, 255, 0));
-		HPEN prevPen = static_cast<HPEN>(SelectObject(hdc, pen));
-		HBRUSH prevBrush = static_cast<HBRUSH>(SelectObject(hdc, mBrush));
+		Pen pen(hdc, mPen);
+		Brush brush(hdc, mBrush);
 		Ellipse(
 			hdc,
 			static_cast<int>(mPos.x),
@@ -41,9 +42,5 @@ namespace ya
 			static_cast<int>(mPos.x + mScale.x),
 			static_cast<int>(mPos.y + mScale.y)
 		);
-		DeleteObject(pen);
-		//DeleteObject(mBrush);
-		SelectObject(hdc, prevPen);
-		SelectObject(hdc, prevBrush);
 	}
 }

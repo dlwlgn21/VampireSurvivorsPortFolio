@@ -11,7 +11,9 @@ namespace ya
 		static void Tick();
 		static void Render(HDC hdc);
 		static void Release();
+		static void ChangeSecne(eSceneType scene);
 		static Scene* GetCurrentScene() { return mCurrentScenes; }
+		
 
 	private:
 		static Scene* mScenes[static_cast<UINT>(eSceneType::COUNT)];

@@ -7,42 +7,69 @@ namespace ya
 {
 	Scene::Scene()
 	{
+		mObjects.resize(MAX_COLLIDER_LAYER);
+		for (int i = 0; i < MAX_COLLIDER_LAYER; ++i)
+		{
+			mObjects[i].reserve(64);
+		}
 	}
 	Scene::~Scene()
 	{
-		for (auto* object : mObjects)
+		for (int i = 0; i < MAX_COLLIDER_LAYER; ++i)
 		{
-			if (object == nullptr) { continue; }
-			delete object;
+			for (int j = 0; j < mObjects[i].size(); ++j)
+			{
+				if (mObjects[i][j] == nullptr) { continue; }
+				delete mObjects[i][j];
+				mObjects[i][j] = nullptr;
+			}
 		}
 	}
 
 	void Scene::Initialize()
 	{
-		for (auto* object : mObjects)
+		for (int i = 0; i < MAX_COLLIDER_LAYER; ++i)
 		{
-			object->Initialize();
+			for (int j = 0; j < mObjects[i].size(); ++j)
+			{
+				if (mObjects[i][j] == nullptr) { continue; }
+				mObjects[i][j]->Initialize();
+			}
 		}
 	}
 
 	void Scene::Tick()
 	{
-		for (size_t i = 0; i < mObjects.size(); i++)
+		for (int i = 0; i < MAX_COLLIDER_LAYER; ++i)
 		{
-			mObjects[i]->Tick();
+			for (int j = 0; j < mObjects[i].size(); ++j)
+			{
+				if (mObjects[i][j] == nullptr) { continue; }
+				mObjects[i][j]->Tick();
+			}
 		}
 	}
 	void Scene::Render(HDC hdc)
 	{
-		for (size_t i = 0; i < mObjects.size(); i++)
+		for (int i = 0; i < MAX_COLLIDER_LAYER; ++i)
 		{
-			mObjects[i]->Render(hdc);
+			for (int j = 0; j < mObjects[i].size(); ++j)
+			{
+				if (mObjects[i][j] == nullptr) { continue; }
+				mObjects[i][j]->Render(hdc);
+			}
 		}
 	}
-	void Scene::AddGameObject(GameObject* object)
+	void Scene::Enter()
+	{
+	}
+	void Scene::Exit()
+	{
+	}
+	void Scene::AddGameObject(GameObject* object, eColliderLayer layer)
 	{
 		assert(object != nullptr);
-		mObjects.push_back(object);
+		mObjects[static_cast<UINT>(layer)].push_back(object);
 	}
 
 }

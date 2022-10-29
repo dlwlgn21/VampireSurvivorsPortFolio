@@ -1,5 +1,4 @@
 #pragma once
-
 #include <cassert>
 
 #define IS_KEY_PRESSED(KEY) ya::Input::GetKeyState(KEY) == ya::eKeyState::PRESSED
@@ -13,4 +12,45 @@ enum class eSceneType
 	PLAY_SCENE,
 	ENDING_SCENE,
 	COUNT
+};
+
+enum class ePenColor
+{
+	RED,
+	BLUE,
+	GREEN,
+	COUNT
+};
+
+enum class eBrushColor
+{
+	TRANS_PARENT,
+	BLACK,
+	GRAY,	// 160, 0, 67
+	WHITE,
+	COUNT
+};
+
+enum class eComponentType
+{
+	ANIMATOR,
+	COLLIDER,
+	SOUND,
+	COUNT
+};
+
+#define MAX_COLLIDER_LAYER (16)
+enum class eColliderLayer
+{
+	DEFAULT,
+	BACKGROUND,
+	TILE,
+	PLAYER,
+	PLAYER_PROJECTTILE,
+	MONSTER,
+	MONSTER_PROJECTTILE,
+
+
+	UI = MAX_COLLIDER_LAYER -1,
+	COUNT = MAX_COLLIDER_LAYER,
 };
