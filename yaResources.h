@@ -12,46 +12,38 @@ namespace ya
 		{
 			auto iter = mResources.find(key);
 			
-			if (iter != mResources.end()) { return static_cast<T*>(iter->second); }
+			if (iter != mResources.end()) { return static_cast<T*>(iter->second.get()); }
 
 			return nullptr;
 		}
 
 		template<typename T>
-
 		static T* Load(const std::wstring& key, const std::wstring& path)
 		{
-			T* pResource = Find<T>(path);
-			if (pResource != nullptr) { return pResource; }
+			T* retPResource = Find<T>(key);
+			if (retPResource != nullptr) { return retPResource; }
 
-			pResource = new T();
-			if (FAILED(pResource->Load(path)))
+			// IF NOT FOUND Resource
+			std::unique_ptr<T> spResource = std::make_unique<T>();
+			if (FAILED(spResource->Load(path)))
 			{
 				assert(false);
 				return nullptr;
 			}
-			pResource->SetKey(key);
-			pResource->SetPath(path);
-			mResources.insert(std::make_pair(key, pResource));
+			spResource->SetKey(key);
+			spResource->SetPath(path);
+			mResources.insert(std::make_pair(key, std::move(spResource)));
 
-			return static_cast<T*>(pResource);
+			return static_cast<T*>(Find<T>(key));
 		}
 
 		static void Release()
 		{
-			//for (auto iter = mResources.begin(); iter != mResources.end(); ++iter)
-			//{
-			//	if (iter->second == nullptr) 
-			//	{
-			//		continue;
-			//	}
-			//	delete iter->second;
-			//	iter->second = nullptr;
-			//}
+			mResources.clear();
 		}
 
 	private:
-		static std::unordered_map<std::wstring, Resource*> mResources;
+		static std::unordered_map<std::wstring, std::unique_ptr<Resource>> mResources;
 	};
 
 }

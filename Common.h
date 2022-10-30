@@ -6,6 +6,7 @@
 #include <map>
 #include <unordered_map>
 #include <bitset>
+#include <memory>
 
 #include "framework.h"
 #include "Maths.h"
