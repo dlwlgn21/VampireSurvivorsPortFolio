@@ -1,12 +1,14 @@
 #pragma once
 #include "yaGameObject.h"
+
 namespace ya
 {
-	class Missile : public GameObject
+	class Image;
+	class Backpack : public GameObject
 	{
 	public:
-		Missile();
-		virtual ~Missile();
+		Backpack();
+		virtual ~Backpack();
 
 		void Tick() override;
 		void Render(HDC hdc) override;
@@ -16,8 +18,8 @@ namespace ya
 
 	private:
 		float mSpeed;
-
+		Image* mpImage;
+		BLENDFUNCTION mFunc;
 	};
-
 }
 

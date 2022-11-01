@@ -33,8 +33,8 @@ namespace ya
 			hdc,
 			static_cast<int>(mPos.x),
 			static_cast<int>(mPos.y),
-			static_cast<int>(mpImage->GetWidth()),
-			static_cast<int>(mpImage->GetHeight()),
+			static_cast<int>(mpImage->GetWidth() * 0.5),
+			static_cast<int>(mpImage->GetHeight() * 0.5),
 
 			mpImage->GetDC(),
 			0, 0,

@@ -11,7 +11,8 @@
 #include "yaResources.h"
 #include "yaAnimator.h"
 #include "yaCollider.h"
-
+#include "yaCamera.h"
+#include "yaBackpack.h"
 namespace ya
 {
 	Player::Player()
@@ -21,13 +22,15 @@ namespace ya
 		, mBrush(CreateSolidBrush(RGB(153, 204, 255)))
 		, mImage(nullptr)
 	{
-		mPos = Vector2::ZERO;
+		SetName(L"Player");
+		mPos = {500.0f, 500.0f};
 		mScale = { 3.0f, 3.0f };
 		mImage = Resources::Load<Image>(L"Player", L"Resources\\Image\\Player.bmp");
 		assert(mImage != nullptr);
 
 		AddComponent(new Animator());
 		AddComponent(new Collider());
+		Camera::SetTarget(this);
 	}
 	Player::~Player()
 	{
@@ -59,19 +62,24 @@ namespace ya
 			currScene->AddGameObject(missile, eColliderLayer::PLAYER_PROJECTTILE);
 			missile->SetPos((GetPos() + (mScale / 2.0f)) - (missile->GetScale() / 2.0f));
 		}
-
-		if (IS_KEY_DOWN(eKeyCode::Z))
+		if (IS_KEY_DOWN(eKeyCode::I))
 		{
-			Meteo* meteo = new Meteo();
 			Scene* currScene = SceneManager::GetCurrentScene();
-			currScene->AddGameObject(meteo, eColliderLayer::PLAYER_PROJECTTILE);
+			currScene->AddGameObject(new Backpack(), eColliderLayer::BACKPACK);
 		}
+
+		//if (IS_KEY_DOWN(eKeyCode::Z))
+		//{
+		//	Meteo* meteo = new Meteo();
+		//	Scene* currScene = SceneManager::GetCurrentScene();
+		//	currScene->AddGameObject(meteo, eColliderLayer::PLAYER_PROJECTTILE);
+		//}
 	}
 
 	void Player::Render(HDC hdc)
 	{
-		Pen	pen(hdc, mPen);
-		Brush brush(hdc, mBrush);
+		//Pen	pen(hdc, mPen);
+		//Brush brush(hdc, mBrush);
 
 		//Rectangle(hdc,
 		//	static_cast<int>(mPos.x),
@@ -94,10 +102,14 @@ namespace ya
 		//	SRCCOPY
 		//);
 
+		Vector2 fPos; 
+		fPos.x = mPos.x - mImage->GetWidth() * (mScale.x / 2);
+		fPos.y = mPos.y - mImage->GetWidth() * (mScale.x / 2);
+		fPos = Camera::ToCameraPos(fPos);
 		TransparentBlt(
 			hdc,
-			static_cast<int>(mPos.x - mImage->GetWidth() * (mScale.x / 2)),
-			static_cast<int>(mPos.y - mImage->GetHeight() * (mScale.y / 2)),
+			static_cast<int>(fPos.x),
+			static_cast<int>(fPos.y),
 			static_cast<int>(mImage->GetWidth() * mScale.x),
 			static_cast<int>(mImage->GetHeight() * mScale.y),
 
@@ -107,7 +119,21 @@ namespace ya
 			mImage->GetHeight(),
 			RGB(255, 0, 255)
 		);
-
+		
 		GameObject::Render(hdc);
+	} 
+
+
+	void Player::OnCollisionEnter(Collider* other)
+	{
+
+	}
+	void Player::OnCollisionStay(Collider* other)
+	{
+
+	}
+	void Player::OnCollisionExit(Collider* other)
+	{
+
 	}
 }

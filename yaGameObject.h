@@ -6,6 +6,7 @@
 namespace ya
 {
 	class Component;
+	class Collider;
 	class GameObject : public Entity
 	{
 	public:
@@ -16,17 +17,22 @@ namespace ya
 		virtual void Tick();
 		virtual void Render(HDC hdc);
 
+		virtual void OnCollisionEnter(Collider* other);
+		virtual void OnCollisionStay(Collider* other);
+		virtual void OnCollisionExit(Collider* other);
+
 		inline void SetPos(Vector2 pos) { mPos = pos; }
 		inline Vector2 GetPos() { return mPos; }
 		inline void SetScale(Vector2 scale) { mScale = scale; }
 		inline Vector2 GetScale() { return mScale; }
 		//inline void SetHdc(HDC hdc) { mHdc = hdc; }
 		//inline HDC GetHdc() { return mHdc; }
-
+		inline void DisableObject() { mIsAlive = false; }
+		inline bool IsAlive() { return mIsAlive; }
 		void AddComponent(Component* component);
 
 		template<typename T>
-		__forceinline T* GetComponent(eComponentType type)
+		__forceinline T* GetComponentOrNull(eComponentType type)
 		{
 			for (Component* component : mComponents)
 			{
@@ -42,6 +48,7 @@ namespace ya
 		std::vector<Component*> mComponents;
 		Vector2 mPos;
 		Vector2 mScale;
+		bool mIsAlive;
 		//HDC mHdc;
 	};
 

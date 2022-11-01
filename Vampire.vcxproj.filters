@@ -147,6 +147,12 @@
     <ClInclude Include="yaCollisionManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="yaCamera.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBackpack.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -226,6 +232,12 @@
     </ClCompile>
     <ClCompile Include="yaCollisionManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCamera.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBackpack.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

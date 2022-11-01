@@ -9,12 +9,13 @@ namespace ya
 		Entity();
 		virtual ~Entity();
 
-		void SetNAme(const std::wstring name) { mName = name; };
+		void SetName(const std::wstring name) { mName = name; };
 		std::wstring GetName() { return mName; }
+		inline UINT32 GetID() { return mID; }
 
 	private:
 		std::wstring mName;
-		UINT mId;
+		UINT32 mID;
 	};
 }
 

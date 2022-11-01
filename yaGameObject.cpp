@@ -5,6 +5,7 @@ namespace ya
 	GameObject::GameObject()
 		: mPos(Vector2::ZERO)
 		, mScale(Vector2::ONE)
+		, mIsAlive(true)
 	{
 	}
 
@@ -39,10 +40,23 @@ namespace ya
 			component->Render(hdc);
 		}
 	}
+	void GameObject::OnCollisionEnter(Collider* other)
+	{
+	}
+
+	void GameObject::OnCollisionStay(Collider* other)
+	{
+	}
+
+	void GameObject::OnCollisionExit(Collider* other)
+	{
+	}
+
 	void GameObject::AddComponent(Component* component)
 	{
 		assert(component != nullptr); 
 		mComponents.push_back(component);
 		component->mOwner = this;
 	}
+
 }

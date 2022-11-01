@@ -1,5 +1,5 @@
 #include "yaTime.h"
-
+#include "yaApplication.h"
 
 namespace ya
 {
@@ -8,7 +8,7 @@ namespace ya
 	LARGE_INTEGER Time::mPrevFrequency;
 	LARGE_INTEGER Time::mCurFrequency;
 	float Time::mDeltaTime = 0.0f;
-
+	HWND Time::mHwnd = Application::GetInstance().GetWindowData().hwnd;
 	void Time::Initialize()
 	{
 		QueryPerformanceFrequency(&mCPUFrequency);			// CPU 초당 반복 되는 진동수를 얻어오는 함수 처음엔 0임.
@@ -38,6 +38,8 @@ namespace ya
 		size_t strLen = wcsnlen_s(buffer, 64);
 
 		TextOut(hdc, 10, 10, buffer, strLen);
+		
+		//SetWindowTextW(mHwnd, buffer);
 	}
 
 }

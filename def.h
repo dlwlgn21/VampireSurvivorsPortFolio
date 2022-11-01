@@ -49,8 +49,19 @@ enum class eColliderLayer
 	PLAYER_PROJECTTILE,
 	MONSTER,
 	MONSTER_PROJECTTILE,
-
+	BACKPACK,
 
 	UI = MAX_COLLIDER_LAYER -1,
 	COUNT = MAX_COLLIDER_LAYER,
+};
+
+union UnionColliderID
+{
+	struct
+	{
+		UINT32 left;
+		UINT32 right;
+	};
+
+	UINT64 ID;
 };

@@ -1,5 +1,8 @@
 #include "yaMissile.h"
 #include "yaTime.h"
+#include "yaCollider.h"
+#include "yaCamera.h"
+
 namespace ya
 {
 
@@ -7,8 +10,8 @@ namespace ya
 		: GameObject()
 		, mSpeed(200.0f)
 	{
-		SetPos({100.0f, 100.0f});
-		SetScale({50.0f, 50.0f});
+		SetScale({20.0f, 20.0f});
+		AddComponent(new Collider(GetScale()));
 	}
 
 	Missile::~Missile()
@@ -17,17 +20,33 @@ namespace ya
 
 	void Missile::Tick()
 	{
+		GameObject::Tick();
 		mPos.y -= mSpeed * Time::DeltaTime();
 	}
 
 	void Missile::Render(HDC hdc)
 	{
+		Vector2 pos = Camera::ToCameraPos(mPos);
 		Ellipse(
 			hdc, 
-			static_cast<int>(mPos.x),
-			static_cast<int>(mPos.y),
-			static_cast<int>(mPos.x + mScale.x),
-			static_cast<int>(mPos.y + mScale.y)
+			static_cast<int>(pos.x - mScale.x),
+			static_cast<int>(pos.y - mScale.y),
+			static_cast<int>(pos.x + mScale.x),
+			static_cast<int>(pos.y + mScale.y)
 		);
+		GameObject::Render(hdc);
+
+	}
+	void Missile::OnCollisionEnter(Collider* other)
+	{
+		GameObject* object = other->GetOwner();
+		object->DisableObject();
+		DisableObject();
+	}
+	void Missile::OnCollisionStay(Collider* other)
+	{
+	}
+	void Missile::OnCollisionExit(Collider* other)
+	{
 	}
 }

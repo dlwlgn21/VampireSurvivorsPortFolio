@@ -32,10 +32,12 @@ namespace ya
 	}
 	void SceneManager::Render(HDC hdc)
 	{
+		// 현재 씬 렌더링
 		mCurrentScenes->Render(hdc);
 	}
 	void SceneManager::Release()
 	{
+		// 프로그램을 종료할 떄 한번만 호출
 		for (auto* scene : mScenes)
 		{
 			if (scene == nullptr) { continue; }

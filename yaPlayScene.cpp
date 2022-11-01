@@ -17,21 +17,21 @@ namespace ya
 	}
 	void PlayScene::Initialize()
 	{
-		//BgImageObject* bg = new BgImageObject();
-		//AddGameObject(bg);
-		AddGameObject(new Player(), eColliderLayer::PLAYER);
-		AddGameObject(new Monster(), eColliderLayer::MONSTER);
-		CollisionManager::SetLayer(eColliderLayer::PLAYER, eColliderLayer::MONSTER, true);
+		/*BgImageObject* bg = new BgImageObject();
+		AddGameObject(bg);*/
+		//AddGameObject(new Player(), eColliderLayer::PLAYER);
+		//AddGameObject(new Monster(), eColliderLayer::MONSTER);
+		//CollisionManager::SetLayer(eColliderLayer::PLAYER, eColliderLayer::MONSTER, true);
 		//Scene::Initialize();
 
 	}
 	void PlayScene::Tick()
 	{
+		Scene::Tick();
 		if (IS_KEY_UP(eKeyCode::N))
 		{
 			SceneManager::ChangeSecne(eSceneType::ENDING_SCENE);
 		}
-		Scene::Tick();
 	}
 	void PlayScene::Render(HDC hdc)
 	{

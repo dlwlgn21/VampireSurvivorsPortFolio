@@ -137,7 +137,9 @@
     <ClInclude Include="Vampire.h" />
     <ClInclude Include="yaAnimator.h" />
     <ClInclude Include="yaApplication.h" />
+    <ClInclude Include="yaBackpack.h" />
     <ClInclude Include="yaBgImageObject.h" />
+    <ClInclude Include="yaCamera.h" />
     <ClInclude Include="yaCollider.h" />
     <ClInclude Include="yaCollisionManager.h" />
     <ClInclude Include="yaComponent.h" />
@@ -165,7 +167,9 @@
     <ClCompile Include="Maths.cpp" />
     <ClCompile Include="yaAnimator.cpp" />
     <ClCompile Include="yaApplication.cpp" />
+    <ClCompile Include="yaBackpack.cpp" />
     <ClCompile Include="yaBgImageObject.cpp" />
+    <ClCompile Include="yaCamera.cpp" />
     <ClCompile Include="yaCollider.cpp" />
     <ClCompile Include="yaCollisionManager.cpp" />
     <ClCompile Include="yaComponent.cpp" />

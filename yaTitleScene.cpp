@@ -20,11 +20,11 @@ namespace ya
 	}
 	void TitleScene::Tick()
 	{
+		Scene::Tick();
 		if (IS_KEY_UP(eKeyCode::N))
 		{
 			SceneManager::ChangeSecne(eSceneType::PLAY_SCENE);
 		}
-		Scene::Tick();
 	}
 	void TitleScene::Render(HDC hdc)
 	{

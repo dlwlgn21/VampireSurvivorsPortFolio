@@ -37,11 +37,6 @@ namespace ya
 			return static_cast<T*>(Find<T>(key));
 		}
 
-		static void Release()
-		{
-			mResources.clear();
-		}
-
 	private:
 		static std::unordered_map<std::wstring, std::unique_ptr<Resource>> mResources;
 	};

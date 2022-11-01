@@ -5,15 +5,15 @@
 #include "yaInput.h"
 #include "yaResources.h"
 #include "yaCollisionManager.h"
+#include "yaCamera.h"
+
 namespace ya
 {
 	Application::~Application()
 	{
 		SceneManager::Release();
-		Resources::Release();
 		ReleaseDC(mWindowData.hwnd, mWindowData.hdc);
 		ReleaseDC(mWindowData.hwnd, mWindowData.backBuffer);
-		
 	}
 
 	void Application::initailizeWindow()
@@ -40,7 +40,6 @@ namespace ya
 		
 		DeleteObject(defaultBitmap);
 
-
 		// 메모리 해재헤주어야 함.
 		mPens[static_cast<UINT>(ePenColor::RED)] = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
 		mPens[static_cast<UINT>(ePenColor::GREEN)] = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
@@ -57,6 +56,7 @@ namespace ya
 		mWindowData.hdc = GetDC(data.hwnd);
 		initailizeWindow();
 
+		Camera::Initialize();
 		Time::Initialize();
 		Input::Initialize(); 
 		SceneManager::Initialze();
@@ -66,15 +66,18 @@ namespace ya
 	{
 		Time::Tick();
 		Input::Tick();
+		Camera::Tick();
 
 		SceneManager::Tick();
 		CollisionManager::Tick();
 		
-		Brush brush(mWindowData.backBuffer, mBrushes[static_cast<UINT>(eBrushColor::GRAY)]);
+		HBRUSH hPrevBrush = (HBRUSH)SelectObject(mWindowData.backBuffer, mBrushes[(UINT)eBrushColor::GRAY]);
+
 		// Clear 겁나 느리게 만듦.
 		Rectangle(
 			mWindowData.backBuffer, -1, -1, 
 			mWindowData.width + 1, mWindowData.height + 1);
+		SelectObject(mWindowData.backBuffer, hPrevBrush);
 
 		SceneManager::Render(mWindowData.backBuffer);
 

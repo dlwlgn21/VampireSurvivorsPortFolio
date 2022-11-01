@@ -14,7 +14,7 @@ namespace ya
 		Component() = delete;
 		virtual ~Component();
 
-		virtual void Tick() = 0;
+		virtual void Tick();
 		virtual void Render(HDC hdc);
 		inline GameObject* GetOwner() { return mOwner; }
 

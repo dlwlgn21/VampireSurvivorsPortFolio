@@ -5,6 +5,8 @@
 #include "yaInput.h"
 #include "yaSceneManager.h"
 #include "yaBgImageObject.h"
+#include "yaMonster.h"
+#include "yaCollisionManager.h"
 
 namespace ya
 {
@@ -16,8 +18,13 @@ namespace ya
 	}
 	void LogoScene::Initialize()
 	{
-		BgImageObject* bg = new BgImageObject(L"LogoBG.bmp");
-		AddGameObject(bg, eColliderLayer::BACKGROUND);
+		//BgImageObject* bg = new BgImageObject(L"LogoBG.bmp");
+		//AddGameObject(bg, eColliderLayer::BACKGROUND);
+		AddGameObject(new Player(), eColliderLayer::PLAYER);
+		AddGameObject(new Monster(Vector2(200.f, 300.f)), eColliderLayer::MONSTER);
+		AddGameObject(new Monster(Vector2(500.f, 300.f)), eColliderLayer::MONSTER);
+		CollisionManager::SetLayer(eColliderLayer::PLAYER, eColliderLayer::MONSTER, true);
+		CollisionManager::SetLayer(eColliderLayer::MONSTER, eColliderLayer::PLAYER_PROJECTTILE, true);
 		//Scene::Initialize();
 		//MeteoManager::GetInstance().Initialzie();
 	}
@@ -25,12 +32,12 @@ namespace ya
 	{
 		//MeteoManager::GetInstance().Tick();
 		// 오브젝트 Tick을 호출한다. 즉 나중에 호출되어야 함.
+		Scene::Tick();
 		if (IS_KEY_UP(eKeyCode::N))
 		{
 			SceneManager::ChangeSecne(eSceneType::TITLE_SCENE);
 		}
 		
-		Scene::Tick();
 	}
 	void LogoScene::Render(HDC hdc)
 	{

@@ -5,6 +5,7 @@
 #include <list>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 #include <bitset>
 #include <memory>
 
@@ -39,6 +40,12 @@ struct WindowData
 struct Pen
 {
 public:
+	Pen(HDC hdc)
+		: mHdc(hdc)
+		, mCurrPen(NULL)
+		, mPrevPen(NULL)
+	{
+	}
 	Pen(HDC hdc, HPEN pen)
 		: mHdc(hdc)
 		, mCurrPen(pen)
@@ -49,10 +56,14 @@ public:
 	~Pen()
 	{
 		SelectObject(mHdc, mPrevPen);
-		// DeleteObject(mCurrPen);
+		DeleteObject(mCurrPen);
 	}
 
 	HPEN GetCurrPen() { return mCurrPen; }
+	void SetPen(HPEN pen)
+	{
+		mPrevPen = static_cast<HPEN>(SelectObject(mHdc, pen));
+	}
 
 private:
 	HDC mHdc;
@@ -73,7 +84,7 @@ public:
 	~Brush()
 	{
 		SelectObject(mHdc, mPrevBrush);
-		// DeleteObject(mCurrBrush);
+		DeleteObject(mCurrBrush);
 	}
 	HBRUSH GetCurrBrush() { return mCurrBrush; }
 

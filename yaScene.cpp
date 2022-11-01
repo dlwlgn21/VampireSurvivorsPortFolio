@@ -33,7 +33,10 @@ namespace ya
 			for (int j = 0; j < mObjects[i].size(); ++j)
 			{
 				if (mObjects[i][j] == nullptr) { continue; }
-				mObjects[i][j]->Initialize();
+				if (mObjects[i][j]->IsAlive())
+				{
+					mObjects[i][j]->Initialize();
+				}
 			}
 		}
 	}
@@ -45,7 +48,10 @@ namespace ya
 			for (int j = 0; j < mObjects[i].size(); ++j)
 			{
 				if (mObjects[i][j] == nullptr) { continue; }
-				mObjects[i][j]->Tick();
+				if (mObjects[i][j]->IsAlive())
+				{
+					mObjects[i][j]->Tick();
+				}
 			}
 		}
 	}
@@ -56,7 +62,10 @@ namespace ya
 			for (int j = 0; j < mObjects[i].size(); ++j)
 			{
 				if (mObjects[i][j] == nullptr) { continue; }
-				mObjects[i][j]->Render(hdc);
+				if (mObjects[i][j]->IsAlive())
+				{
+					mObjects[i][j]->Render(hdc);
+				}
 			}
 		}
 	}
