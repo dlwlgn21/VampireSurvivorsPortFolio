@@ -34,6 +34,7 @@ enum class eBrushColor
 enum class eComponentType
 {
 	ANIMATOR,
+	ANIMATION,
 	COLLIDER,
 	SOUND,
 	COUNT
@@ -64,4 +65,11 @@ union UnionColliderID
 	};
 
 	UINT64 ID;
+};
+
+enum class eCameraEffect
+{
+	FADE_IN,
+	FADE_OUT,
+	COUNT
 };

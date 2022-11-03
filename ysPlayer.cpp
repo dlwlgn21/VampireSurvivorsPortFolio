@@ -13,6 +13,8 @@
 #include "yaCollider.h"
 #include "yaCamera.h"
 #include "yaBackpack.h"
+#include "yaObject.h"
+
 namespace ya
 {
 	Player::Player()
@@ -24,6 +26,23 @@ namespace ya
 	{
 		SetName(L"Player");
 		mPos = {500.0f, 500.0f};
+		mScale = { 3.0f, 3.0f };
+		mImage = Resources::Load<Image>(L"Player", L"Resources\\Image\\Player.bmp");
+		assert(mImage != nullptr);
+
+		AddComponent(new Animator());
+		AddComponent(new Collider());
+		Camera::SetTarget(this);
+	}
+	Player::Player(Vector2 pos)
+		: GameObject()
+		, mSpeed(500.0f)
+		, mPen(CreatePen(PS_DASHDOTDOT, 3, RGB(0, 255, 255)))
+		, mBrush(CreateSolidBrush(RGB(153, 204, 255)))
+		, mImage(nullptr)
+	{
+		SetName(L"Player");
+		mPos = pos;
 		mScale = { 3.0f, 3.0f };
 		mImage = Resources::Load<Image>(L"Player", L"Resources\\Image\\Player.bmp");
 		assert(mImage != nullptr);
@@ -57,9 +76,7 @@ namespace ya
 		}
 		if (IS_KEY_DOWN(eKeyCode::SPACE))
 		{
-			Missile* missile = new Missile();
-			Scene* currScene = SceneManager::GetCurrentScene();
-			currScene->AddGameObject(missile, eColliderLayer::PLAYER_PROJECTTILE);
+			Missile* missile = ya::object::Instantiate<Missile>(eColliderLayer::PLAYER_PROJECTTILE);
 			missile->SetPos((GetPos() + (mScale / 2.0f)) - (missile->GetScale() / 2.0f));
 		}
 		if (IS_KEY_DOWN(eKeyCode::I))
@@ -68,12 +85,6 @@ namespace ya
 			currScene->AddGameObject(new Backpack(), eColliderLayer::BACKPACK);
 		}
 
-		//if (IS_KEY_DOWN(eKeyCode::Z))
-		//{
-		//	Meteo* meteo = new Meteo();
-		//	Scene* currScene = SceneManager::GetCurrentScene();
-		//	currScene->AddGameObject(meteo, eColliderLayer::PLAYER_PROJECTTILE);
-		//}
 	}
 
 	void Player::Render(HDC hdc)
@@ -102,7 +113,7 @@ namespace ya
 		//	SRCCOPY
 		//);
 
-		Vector2 fPos; 
+	/*	Vector2 fPos; 
 		fPos.x = mPos.x - mImage->GetWidth() * (mScale.x / 2);
 		fPos.y = mPos.y - mImage->GetWidth() * (mScale.x / 2);
 		fPos = Camera::ToCameraPos(fPos);
@@ -118,7 +129,7 @@ namespace ya
 			mImage->GetWidth(),
 			mImage->GetHeight(),
 			RGB(255, 0, 255)
-		);
+		);*/
 		
 		GameObject::Render(hdc);
 	} 

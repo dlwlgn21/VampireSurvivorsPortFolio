@@ -153,6 +153,18 @@
     <ClInclude Include="yaBackpack.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="yaBGImageObjectAlpha.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="yaObject.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="yaButtonImageObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="yaAnimation.h">
+      <Filter>Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -238,6 +250,15 @@
     </ClCompile>
     <ClCompile Include="yaBackpack.cpp">
       <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBGImageObjectAlpha.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="yaButtonImageObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="yaAnimation.cpp">
+      <Filter>Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

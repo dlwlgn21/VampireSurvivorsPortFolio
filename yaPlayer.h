@@ -7,6 +7,7 @@ namespace ya
 	{
 	public:
 		Player();
+		Player(Vector2 pos);
 		virtual ~Player();
 
 		void Tick() override;
@@ -14,7 +15,6 @@ namespace ya
 		void OnCollisionEnter(Collider* other) override;
 		void OnCollisionStay(Collider* other) override;
 		void OnCollisionExit(Collider* other) override;
-
 	private:
 		float mSpeed;
 		HPEN mPen;

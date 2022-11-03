@@ -16,6 +16,18 @@ namespace ya
 		ReleaseDC(mWindowData.hwnd, mWindowData.backBuffer);
 	}
 
+	void Application::Initialize(WindowData data)
+	{
+		mWindowData = data;
+		mWindowData.hdc = GetDC(data.hwnd);
+		initailizeWindow();
+
+		Camera::Initialize();
+		Time::Initialize();
+		Input::Initialize();
+		SceneManager::Initialze();
+	}
+
 	void Application::initailizeWindow()
 	{
 		// 비트맵 해상도를 설정하기 위한 실제 위도우 크기 계산
@@ -40,7 +52,7 @@ namespace ya
 		
 		DeleteObject(defaultBitmap);
 
-		// 메모리 해재헤주어야 함.
+		// 메모리 해제 해주어야 함.
 		mPens[static_cast<UINT>(ePenColor::RED)] = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
 		mPens[static_cast<UINT>(ePenColor::GREEN)] = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
 		mPens[static_cast<UINT>(ePenColor::BLUE)] = CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
@@ -48,18 +60,6 @@ namespace ya
 		mBrushes[static_cast<UINT>(eBrushColor::BLACK)] = static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));
 		mBrushes[static_cast<UINT>(eBrushColor::GRAY)] = CreateSolidBrush(RGB(67, 67, 67));
 		mBrushes[static_cast<UINT>(eBrushColor::WHITE)] = static_cast<HBRUSH>(GetStockObject(WHITE_BRUSH));
-	}
-
-	void Application::Initialize(WindowData data)
-	{
-		mWindowData = data;
-		mWindowData.hdc = GetDC(data.hwnd);
-		initailizeWindow();
-
-		Camera::Initialize();
-		Time::Initialize();
-		Input::Initialize(); 
-		SceneManager::Initialze();
 	}
 
 	void Application::Tick()
@@ -80,7 +80,7 @@ namespace ya
 		SelectObject(mWindowData.backBuffer, hPrevBrush);
 
 		SceneManager::Render(mWindowData.backBuffer);
-
+		Camera::Render(mWindowData.backBuffer);
 		Input::Render(mWindowData.backBuffer);
 		Time::Render(mWindowData.backBuffer);
 
@@ -93,5 +93,8 @@ namespace ya
 			0, 0,
 			SRCCOPY										// 어떻게 그릴거냐
 		);
+
+		// 틱과 렌더 모두 끝내고 Gameobject 삭제 
+		SceneManager::DestroyGameobject();
 	}
 }

@@ -10,6 +10,7 @@
 namespace ya
 {
 	PlayScene::PlayScene()
+		: mSceneType(eSceneType::PLAY_SCENE)
 	{
 	}
 	PlayScene::~PlayScene()

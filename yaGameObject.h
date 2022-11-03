@@ -11,6 +11,7 @@ namespace ya
 	{
 	public:
 		GameObject();
+		GameObject(Vector2 pos);
 		virtual ~GameObject();
 
 		virtual void Initialize();
@@ -29,6 +30,7 @@ namespace ya
 		//inline HDC GetHdc() { return mHdc; }
 		inline void DisableObject() { mIsAlive = false; }
 		inline bool IsAlive() { return mIsAlive; }
+		inline void SetDisableTime(float time);
 		void AddComponent(Component* component);
 
 		template<typename T>
@@ -49,6 +51,8 @@ namespace ya
 		Vector2 mPos;
 		Vector2 mScale;
 		bool mIsAlive;
+		float mDeathTime;
+		bool mbDeathTriggerFlag;
 		//HDC mHdc;
 	};
 

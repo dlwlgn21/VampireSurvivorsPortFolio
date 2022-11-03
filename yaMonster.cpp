@@ -19,7 +19,7 @@ namespace ya
 		mpImage = Resources::Load<Image>(L"Monster", L"Resources\\Image\\Monster.bmp");
 		assert(mpImage != nullptr);
 
-		AddComponent(new Animator());
+		//AddComponent(new Animator());
 		AddComponent(new Collider());
 	}
 	Monster::Monster(Vector2 pos)
@@ -34,7 +34,7 @@ namespace ya
 		mpImage = Resources::Load<Image>(L"Monster", L"Resources\\Image\\Monster.bmp");
 		assert(mpImage != nullptr);
 
-		AddComponent(new Animator());
+		//AddComponent(new Animator());
 		AddComponent(new Collider());
 	}
 	Monster::~Monster()

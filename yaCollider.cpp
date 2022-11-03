@@ -49,14 +49,20 @@ namespace ya
 		{
 			prevPen = static_cast<HPEN>(SelectObject(hdc, greenPen));
 		}
-
-		mPos = Camera::ToCameraPos(mPos);
+		Vector2 fPos;
+		fPos.x = mPos.x - mScale.x / 2;
+		fPos.y = mPos.y - mScale.y / 2;
+		Vector2 fScale;
+		fScale.x = mPos.x + mScale.x / 2;
+		fScale.y = mPos.y + mScale.y / 2;
+		fPos = Camera::ToCameraPos(fPos);
+		fScale = Camera::ToCameraPos(fScale);
 		Rectangle(
 			hdc,
-			static_cast<int>(mPos.x - mScale.x / 2),
-			static_cast<int>(mPos.y - mScale.y / 2),
-			static_cast<int>(mPos.x + mScale.x / 2),
-			static_cast<int>(mPos.y + mScale.y / 2)
+			static_cast<int>(fPos.x),
+			static_cast<int>(fPos.y),
+			static_cast<int>(fScale.x),
+			static_cast<int>(fScale.y)
 		);
 		SelectObject(hdc, prevPen);
 		DeleteObject(redPen);

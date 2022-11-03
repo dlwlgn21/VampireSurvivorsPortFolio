@@ -13,6 +13,8 @@ namespace ya
 		inline HDC GetDC() { return mHdc; }
 		inline UINT GetWidth() { return mWidth; }
 		inline UINT GetHeight() { return mHeight; }
+		
+		static Image* Create(const std::wstring& key, UINT width, UINT height);
 	private:
 		HBITMAP mBitmap;
 		HDC mHdc;

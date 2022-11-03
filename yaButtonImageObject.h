@@ -1,13 +1,14 @@
 #pragma once
 #include "yaGameObject.h"
+
 namespace ya
 {
 	class Image;
-	class BgImageObject final : public GameObject
+	class ButtonImageObject final : public GameObject
 	{
 	public:
-		BgImageObject(const std::wstring key);
-		virtual ~BgImageObject();
+		ButtonImageObject(const std::wstring key);
+		virtual ~ButtonImageObject();
 
 		void Initialize() override;
 		void Tick() override;
@@ -16,5 +17,6 @@ namespace ya
 		Image* mpImage;
 		std::wstring mKey;
 	};
+
 }
 

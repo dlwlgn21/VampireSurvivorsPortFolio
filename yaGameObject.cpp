@@ -1,4 +1,5 @@
 #include "yaGameObject.h"
+#include "yaTime.h"
 
 namespace ya
 {
@@ -6,6 +7,17 @@ namespace ya
 		: mPos(Vector2::ZERO)
 		, mScale(Vector2::ONE)
 		, mIsAlive(true)
+		, mDeathTime(-100.0f)
+		, mbDeathTriggerFlag(false)
+	{
+	}
+
+	GameObject::GameObject(Vector2 pos)
+		: mPos(pos)
+		, mScale(Vector2::ONE)
+		, mIsAlive(true)
+		, mDeathTime(-100.0f)
+		, mbDeathTriggerFlag(false)
 	{
 	}
 
@@ -24,6 +36,15 @@ namespace ya
 
 	void GameObject::Tick()
 	{
+		if (mbDeathTriggerFlag)
+		{
+			mDeathTime -= Time::DeltaTime();
+			if (mDeathTime <= 0.0f)
+			{
+				DisableObject();
+			}
+		}
+
 		// 모든 컴포넌트의 Tick 호출
 		for (Component* component : mComponents)
 		{
@@ -50,6 +71,15 @@ namespace ya
 
 	void GameObject::OnCollisionExit(Collider* other)
 	{
+	}
+
+	inline void GameObject::SetDisableTime(float time)
+	{
+		if (mDeathTime <= 0.0f) 
+		{ 
+			mDeathTime = time; 
+			mbDeathTriggerFlag = true; 
+		}
 	}
 
 	void GameObject::AddComponent(Component* component)

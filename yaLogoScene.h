@@ -16,7 +16,10 @@ namespace ya
 
 		void Enter() override;
 		void Exit() override;
+		inline eSceneType GetSceneTpye() { return mSceneType; }
+
 	private:
+		eSceneType mSceneType;
 	};
 
 }

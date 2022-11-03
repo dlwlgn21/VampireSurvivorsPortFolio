@@ -16,6 +16,19 @@ namespace ya
 
 			return nullptr;
 		}
+		
+		template<typename T>
+		static void Insert(const std::wstring& key, T* resource)
+		{
+			assert(resource != nullptr || key == L"");
+			if (resource == nullptr || key == L"") { return; }
+			auto res = mResources.insert(std::make_pair(key, resource));
+			if (res.second == false)
+			{
+				assert(false);
+			}
+		}
+
 
 		template<typename T>
 		static T* Load(const std::wstring& key, const std::wstring& path)

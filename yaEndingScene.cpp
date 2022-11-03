@@ -7,6 +7,7 @@
 namespace ya
 {
 	EndingScene::EndingScene()
+		: mSceneType(eSceneType::ENDING_SCENE)
 	{
 	}
 	EndingScene::~EndingScene()

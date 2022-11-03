@@ -12,17 +12,16 @@ namespace ya
 			static Application instance;
 			return instance;
 		}
+		Application() = default;
 		void Initialize(WindowData data);
 		void Tick();
-		Application() = default;
-		~Application();
-
 		WindowData GetWindowData() { return mWindowData; }
-
+		inline HDC GetHDC() { return mWindowData.hdc; }
 		inline HPEN GetPen(ePenColor color) { return mPens[static_cast<UINT>(color)]; }
 		inline HBRUSH GetBrush(eBrushColor color) { return mBrushes[static_cast<UINT>(color)]; }
 
 	private:
+		~Application();
 		void initailizeWindow();
 	private:
 		WindowData mWindowData;

@@ -1,10 +1,10 @@
-#include <cassert>
-#include "yaBgImageObject.h"
-#include "yaResources.h"
+#include "yaButtonImageObject.h"
 #include "yaImage.h"
+#include "yaResources.h"
+
 namespace ya
 {
-	BgImageObject::BgImageObject(const std::wstring key)
+	ButtonImageObject::ButtonImageObject(const std::wstring key)
 		: GameObject()
 		, mpImage(nullptr)
 		, mKey(key)
@@ -17,17 +17,18 @@ namespace ya
 		}
 		assert(mpImage != nullptr);
 	}
-	BgImageObject::~BgImageObject()
+	ButtonImageObject::~ButtonImageObject()
 	{
 	}
-	void BgImageObject::Initialize()
+	void ButtonImageObject::Initialize()
 	{
 	}
-	void BgImageObject::Tick()
+	void ButtonImageObject::Tick()
 	{
 		GameObject::Tick();
+
 	}
-	void BgImageObject::Render(HDC hdc)
+	void ButtonImageObject::Render(HDC hdc)
 	{
 		TransparentBlt(
 			hdc,

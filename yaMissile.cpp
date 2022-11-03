@@ -5,10 +5,10 @@
 
 namespace ya
 {
-
 	Missile::Missile()
 		: GameObject()
 		, mSpeed(200.0f)
+		, mLifeTime(3.0f)
 	{
 		SetScale({20.0f, 20.0f});
 		AddComponent(new Collider(GetScale()));
@@ -17,11 +17,15 @@ namespace ya
 	Missile::~Missile()
 	{
 	}
-
 	void Missile::Tick()
 	{
 		GameObject::Tick();
 		mPos.y -= mSpeed * Time::DeltaTime();
+		mLifeTime -= Time::DeltaTime();
+		if (mLifeTime <= 0.0f)
+		{
+			this->DisableObject();
+		}
 	}
 
 	void Missile::Render(HDC hdc)

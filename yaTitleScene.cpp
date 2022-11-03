@@ -2,11 +2,15 @@
 #include "yaSceneManager.h"
 #include "yaInput.h"
 #include "yaBgImageObject.h"
+#include "yaBGImageObjectAlpha.h"
 #include "yaSceneManager.h"
+#include "yaObject.h"
+#include "yaButtonImageObject.h"
 
 namespace ya
 {
 	TitleScene::TitleScene()
+		: mSceneType(eSceneType::TITLE_SCENE)
 	{
 	}
 	TitleScene::~TitleScene()
@@ -14,9 +18,15 @@ namespace ya
 	}
 	void TitleScene::Initialize()
 	{
-		BgImageObject* bg = new BgImageObject(L"TitleBG.bmp");
-		AddGameObject(bg, eColliderLayer::BACKGROUND);
-		//SceneManager::Initialze();
+		//AddGameObject(new BgImageObject(L"TitleBG.bmp"), eColliderLayer::BACKGROUND);
+		//AddGameObject(new BGImageObjectAlpha(L"TitleCharacterBG.bmp"), eColliderLayer::BACKGROUND);
+		ya::object::InstantiateAtAnotherScene<BgImageObject>(eColliderLayer::BACKGROUND, L"TitleBG.bmp", GetSceneTpye());
+		//ya::object::InstantiateAtAnotherScene<BgImageObject>(eColliderLayer::BACKGROUND, L"TitleCharacterBG.bmp", GetSceneTpye());
+		//SceneManager::Initialze() ;
+		//ya::object::InstantiateAtAnotherScene<ButtonImageObject>(eColliderLayer::BACKGROUND, L"TitleButton.bmp", GetSceneTpye(), Vector2(600.0f, 200.0f));
+		//ya::object::InstantiateAtAnotherScene<ButtonImageObject>(eColliderLayer::BACKGROUND, L"TitleButton.bmp", GetSceneTpye(), Vector2(600.0f, 400.0f));
+		//ya::object::InstantiateAtAnotherScene<ButtonImageObject>(eColliderLayer::BACKGROUND, L"TitleButton.bmp", GetSceneTpye(), Vector2(600.0f, 600.0f));
+
 	}
 	void TitleScene::Tick()
 	{

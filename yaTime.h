@@ -19,6 +19,7 @@ namespace ya
 		static LARGE_INTEGER mCurFrequency;		// 내 현재 프레임 진동수
 		static HWND mHwnd;
 		static float mDeltaTime;
+		static float mTime;
 	};
 }
 

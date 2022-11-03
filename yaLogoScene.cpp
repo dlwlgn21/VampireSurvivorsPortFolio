@@ -7,10 +7,12 @@
 #include "yaBgImageObject.h"
 #include "yaMonster.h"
 #include "yaCollisionManager.h"
+#include "yaObject.h"
 
 namespace ya
 {
 	LogoScene::LogoScene()
+		: mSceneType(eSceneType::LOGO_SCENE)
 	{
 	}
 	LogoScene::~LogoScene()
@@ -20,11 +22,16 @@ namespace ya
 	{
 		//BgImageObject* bg = new BgImageObject(L"LogoBG.bmp");
 		//AddGameObject(bg, eColliderLayer::BACKGROUND);
-		AddGameObject(new Player(), eColliderLayer::PLAYER);
-		AddGameObject(new Monster(Vector2(200.f, 300.f)), eColliderLayer::MONSTER);
-		AddGameObject(new Monster(Vector2(500.f, 300.f)), eColliderLayer::MONSTER);
+
+		ya::object::Instantiate<Player>(eColliderLayer::PLAYER);
+		ya::object::Instantiate<Monster>(eColliderLayer::MONSTER, Vector2(200.f, 300.f));
+		ya::object::Instantiate<Monster>(eColliderLayer::MONSTER, Vector2(500.f, 300.f));
+		//AddGameObject(new Monster(Vector2(200.f, 300.f)), eColliderLayer::MONSTER);
+		//AddGameObject(new Monster(Vector2(500.f, 300.f)), eColliderLayer::MONSTER);
 		CollisionManager::SetLayer(eColliderLayer::PLAYER, eColliderLayer::MONSTER, true);
 		CollisionManager::SetLayer(eColliderLayer::MONSTER, eColliderLayer::PLAYER_PROJECTTILE, true);
+		
+		
 		//Scene::Initialize();
 		//MeteoManager::GetInstance().Initialzie();
 	}

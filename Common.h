@@ -8,6 +8,8 @@
 #include <unordered_set>
 #include <bitset>
 #include <memory>
+#include <functional>
+
 
 #include "framework.h"
 #include "Maths.h"

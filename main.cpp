@@ -1,5 +1,4 @@
 ﻿#include <cassert>
-#include "Common.h"
 #include "framework.h"
 #include "Vampire.h"
 #include "yaApplication.h"
@@ -16,23 +15,7 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-//struct Pos
-//{
-//    int x;
-//    int y;
-//
-//    Pos& operator+=(const Pos other)
-//    {
-//        x += other.x;
-//        y += other.y;
-//
-//        return *this;
-//    }
-//};
-//
-//typedef Pos Size;
 ya::Application& app = ya::Application::GetInstance();
-
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -169,11 +152,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
 
-        HBRUSH hClearBrush = static_cast<HBRUSH>(GetStockObject(GRAY_BRUSH));
-        HBRUSH hPrevClearBrush = static_cast<HBRUSH>(SelectObject(hdc, hClearBrush));
+        //HBRUSH hClearBrush = static_cast<HBRUSH>(GetStockObject(GRAY_BRUSH));
+        //HBRUSH hPrevClearBrush = static_cast<HBRUSH>(SelectObject(hdc, hClearBrush));
 
-        Rectangle(hdc, 0, 0, 1920, 1080);
-        SelectObject(hdc, hPrevClearBrush);
+        //Rectangle(hdc, 0, 0, 1920, 1080);
+        //SelectObject(hdc, hPrevClearBrush);
         EndPaint(hWnd, &ps);
 
     }

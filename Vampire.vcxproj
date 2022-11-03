@@ -135,10 +135,13 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="Vampire.h" />
+    <ClInclude Include="yaAnimation.h" />
     <ClInclude Include="yaAnimator.h" />
     <ClInclude Include="yaApplication.h" />
     <ClInclude Include="yaBackpack.h" />
     <ClInclude Include="yaBgImageObject.h" />
+    <ClInclude Include="yaBGImageObjectAlpha.h" />
+    <ClInclude Include="yaButtonImageObject.h" />
     <ClInclude Include="yaCamera.h" />
     <ClInclude Include="yaCollider.h" />
     <ClInclude Include="yaCollisionManager.h" />
@@ -153,6 +156,7 @@
     <ClInclude Include="yaMeteoManager.h" />
     <ClInclude Include="yaMissile.h" />
     <ClInclude Include="yaMonster.h" />
+    <ClInclude Include="yaObject.h" />
     <ClInclude Include="yaPlayer.h" />
     <ClInclude Include="yaPlayScene.h" />
     <ClInclude Include="yaResource.h" />
@@ -165,10 +169,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maths.cpp" />
+    <ClCompile Include="yaAnimation.cpp" />
     <ClCompile Include="yaAnimator.cpp" />
     <ClCompile Include="yaApplication.cpp" />
     <ClCompile Include="yaBackpack.cpp" />
     <ClCompile Include="yaBgImageObject.cpp" />
+    <ClCompile Include="yaBGImageObjectAlpha.cpp" />
+    <ClCompile Include="yaButtonImageObject.cpp" />
     <ClCompile Include="yaCamera.cpp" />
     <ClCompile Include="yaCollider.cpp" />
     <ClCompile Include="yaCollisionManager.cpp" />

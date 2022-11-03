@@ -16,7 +16,7 @@ namespace ya
 
 	private:
 		float mSpeed;
-
+		float mLifeTime;
 	};
 
 }
