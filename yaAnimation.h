@@ -34,18 +34,22 @@ namespace ya
 		void Create(
 			Image* pImage, Vector2 leftTop,
 			Vector2 size, Vector2 offset,
-			float colLength, UINT spriteLength, float duration,
+			UINT spriteLength, float duration,
 			bool bIsAffectedCamera = true);
 
 		void Reset();
-		inline bool IsComplete() { return mbIsComplete; }
-		inline void SetAnimator(Animator* animator) { mpAnimator = animator; };
+		__forceinline bool IsComplete() { return mbIsComplete; }
+		__forceinline void SetAnimator(Animator* animator) { mpAnimator = animator; };
+	
 	private:
 		Image* mpImage;
 		Animator* mpAnimator;
 		std::vector<Sprite> mSpriteSheet;
+		BLENDFUNCTION mFunc;
 		UINT mSpriteIdx;
 		float mTime;
+
+
 
 		bool mbIsStart;
 		bool mbIsComplete;

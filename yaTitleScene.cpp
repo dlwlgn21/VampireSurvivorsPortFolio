@@ -18,14 +18,7 @@ namespace ya
 	}
 	void TitleScene::Initialize()
 	{
-		//AddGameObject(new BgImageObject(L"TitleBG.bmp"), eColliderLayer::BACKGROUND);
-		//AddGameObject(new BGImageObjectAlpha(L"TitleCharacterBG.bmp"), eColliderLayer::BACKGROUND);
 		ya::object::InstantiateAtAnotherScene<BgImageObject>(eColliderLayer::BACKGROUND, L"TitleBG.bmp", GetSceneTpye());
-		//ya::object::InstantiateAtAnotherScene<BgImageObject>(eColliderLayer::BACKGROUND, L"TitleCharacterBG.bmp", GetSceneTpye());
-		//SceneManager::Initialze() ;
-		//ya::object::InstantiateAtAnotherScene<ButtonImageObject>(eColliderLayer::BACKGROUND, L"TitleButton.bmp", GetSceneTpye(), Vector2(600.0f, 200.0f));
-		//ya::object::InstantiateAtAnotherScene<ButtonImageObject>(eColliderLayer::BACKGROUND, L"TitleButton.bmp", GetSceneTpye(), Vector2(600.0f, 400.0f));
-		//ya::object::InstantiateAtAnotherScene<ButtonImageObject>(eColliderLayer::BACKGROUND, L"TitleButton.bmp", GetSceneTpye(), Vector2(600.0f, 600.0f));
 
 	}
 	void TitleScene::Tick()

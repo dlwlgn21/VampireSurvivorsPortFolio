@@ -3,17 +3,50 @@
 #include "yaAnimator.h"
 #include "yaCamera.h"
 #include "yaGameObject.h"
-
+#include "yaTime.h"
 namespace ya
 {
+	/*
+		Image* mpImage;
+		Animator* mpAnimator;
+		std::vector<Sprite> mSpriteSheet;
+		BLENDFUNCTION mFunc;
+		UINT mSpriteIdx;
+		float mTime;
+		bool mbIsStart;
+		bool mbIsComplete;
+		bool mbIsEnd;
+		bool mbIsAffectedCamera;
+	
+	*/
 	Animation::Animation()
 		: Component(eComponentType::ANIMATION)
+		, mpImage(nullptr)
+		, mpAnimator(nullptr)
+		, mSpriteIdx(0)
+		, mTime(0.0f)
+		, mbIsStart(false)
+		, mbIsEnd(false)
+		, mbIsComplete(false)
+		, mbIsAffectedCamera(false)
 	{
-		mSpriteSheet.reserve(120);
+		mFunc.BlendOp = AC_SRC_OVER;
+		mFunc.BlendFlags = 0;
+		mFunc.AlphaFormat = AC_SRC_ALPHA;
+		mFunc.SourceConstantAlpha = 255;
+		mSpriteSheet.reserve(32);
 	}
 
 	void Animation::Tick()
 	{
+		if (mbIsComplete) { return; }
+		mTime += Time::DeltaTime();
+		if (mSpriteSheet[mSpriteIdx].Durtation < mTime)
+		{
+			mTime = 0.0f;
+			if (mSpriteIdx + 1 >= mSpriteSheet.size())	{ mbIsComplete = true; }
+			else										{ ++mSpriteIdx; }
+		}
 
 	}
 	void Animation::Render(HDC hdc)
@@ -37,15 +70,8 @@ namespace ya
 		//);
 		GameObject* gameObject = mpAnimator->GetOwner();
 		Vector2 pos = gameObject->GetPos();
-		if (!mbIsAffectedCamera)
-		{
-
-		}
-		BLENDFUNCTION Func;
-		Func.BlendOp = AC_SRC_OVER;
-		Func.BlendFlags = 0;
-		Func.AlphaFormat = AC_SRC_ALPHA;
-		Func.SourceConstantAlpha = 255;
+		if (mbIsAffectedCamera) { pos = Camera::ToCameraPos(pos); }
+		pos += mSpriteSheet[mSpriteIdx].Offset;
 
 		AlphaBlend(
 			hdc,
@@ -59,18 +85,17 @@ namespace ya
 			static_cast<int>(mSpriteSheet[mSpriteIdx].LeftTop.y),
 			static_cast<int>(mSpriteSheet[mSpriteIdx].Size.x),
 			static_cast<int>(mSpriteSheet[mSpriteIdx].Size.y),
-			Func
+			mFunc
 		);
-
 	}
-	void Animation::Create(Image* pImage, Vector2 leftTop, Vector2 size, Vector2 offset, float colLength, UINT spriteLength, float duration, bool bIsAffectedCamera)
+	void Animation::Create(Image* pImage, Vector2 leftTop, Vector2 size, Vector2 offset, UINT spriteLength, float duration, bool bIsAffectedCamera)
 	{
 		mpImage = pImage;
 		mbIsAffectedCamera = bIsAffectedCamera;
-		for (int i = 0; i < spriteLength; ++i)
+		for (UINT i = 0; i < spriteLength; ++i)
 		{
 			Sprite sprite;
-			sprite.LeftTop.x = leftTop.x + (colLength * i);
+			sprite.LeftTop.x = leftTop.x + (size.x * i);
 			sprite.LeftTop.y = leftTop.y;
 			sprite.Size = size;
 			sprite.Offset = offset;
@@ -80,5 +105,8 @@ namespace ya
 	}
 	void Animation::Reset()
 	{
+		mSpriteIdx = 0;
+		mTime = 0.0f;
+		mbIsComplete = false;
 	}
 }

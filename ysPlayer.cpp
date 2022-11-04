@@ -22,35 +22,40 @@ namespace ya
 		, mSpeed(500.0f)
 		, mPen(CreatePen(PS_DASHDOTDOT, 3, RGB(0, 255, 255)))
 		, mBrush(CreateSolidBrush(RGB(153, 204, 255)))
-		, mImage(nullptr)
+		, mpImage(nullptr)
+		, mAnimIdle(L"Idle")
+		, mAnimMoveUp(L"MoveUp")
+		, mAnimMoveDown(L"MoveDown")
+		, mAnimMoveLeft(L"MoveLeft")
+		, mAnimMoveRight(L"MoveRight")
+		, mAnimSize(120.0f, 130.0f)
+		, mAnimRowInterval(130.0f)
+		, animDuration(0.1f)
 	{
 		SetName(L"Player");
-		mPos = {500.0f, 500.0f};
+		mPos = { 500.0f, 500.0f };
 		mScale = { 3.0f, 3.0f };
-		mImage = Resources::Load<Image>(L"Player", L"Resources\\Image\\Player.bmp");
-		assert(mImage != nullptr);
+		mpImage = Resources::Load<Image>(L"Player", L"Resources\\Image\\link.bmp");
+		assert(mpImage != nullptr);
 
-		AddComponent(new Animator());
+		mpAnimator = new Animator();
+
+		createAnimation(mAnimIdle,		Vector2(0.0f, 0.0f),	mAnimSize,	Vector2(0.0f, 0.0f), 3,  animDuration);
+		createAnimation(mAnimMoveDown,	Vector2(0.0f, 520.0f),	mAnimSize,	Vector2(0.0f, 0.0f), 10, animDuration);
+		createAnimation(mAnimMoveLeft,	Vector2(0.0f, 650.0f),	mAnimSize,	Vector2(0.0f, 0.0f), 10, animDuration);
+		createAnimation(mAnimMoveUp,	Vector2(0.0f, 780.0f),	mAnimSize,	Vector2(0.0f, 0.0f), 10, animDuration);
+		createAnimation(mAnimMoveRight,	Vector2(0.0f, 910.0f),	mAnimSize,	Vector2(0.0f, 0.0f), 10, animDuration);
+
+		mpAnimator->Play(mAnimIdle, true);
+
+		// 이거 내가 따로 다시 공부해야함. 마지막 이벤트에 고고
+		mpAnimator->mCompleteEvent = std::bind(&Player::WalkComplete, this);
+
 		AddComponent(new Collider());
+		AddComponent(mpAnimator);
 		Camera::SetTarget(this);
 	}
-	Player::Player(Vector2 pos)
-		: GameObject()
-		, mSpeed(500.0f)
-		, mPen(CreatePen(PS_DASHDOTDOT, 3, RGB(0, 255, 255)))
-		, mBrush(CreateSolidBrush(RGB(153, 204, 255)))
-		, mImage(nullptr)
-	{
-		SetName(L"Player");
-		mPos = pos;
-		mScale = { 3.0f, 3.0f };
-		mImage = Resources::Load<Image>(L"Player", L"Resources\\Image\\Player.bmp");
-		assert(mImage != nullptr);
 
-		AddComponent(new Animator());
-		AddComponent(new Collider());
-		Camera::SetTarget(this);
-	}
 	Player::~Player()
 	{
 	}
@@ -58,22 +63,21 @@ namespace ya
 	void Player::Tick()
 	{
 		GameObject::Tick();
-		if (IS_KEY_PRESSED(eKeyCode::W))
-		{
-			mPos.y -= mSpeed * Time::DeltaTime();
-		}
-		if (IS_KEY_PRESSED(eKeyCode::S))
-		{
-			mPos.y += mSpeed * Time::DeltaTime();
-		}
-		if (IS_KEY_PRESSED(eKeyCode::A))
-		{
-			mPos.x -= mSpeed * Time::DeltaTime();
-		}
-		if (IS_KEY_PRESSED(eKeyCode::D))
-		{
-			mPos.x += mSpeed * Time::DeltaTime();
-		}
+		if (IS_KEY_PRESSED(eKeyCode::W))	{ mPos.y -= mSpeed * Time::DeltaTime(); }
+		if (IS_KEY_PRESSED(eKeyCode::S))	{ mPos.y += mSpeed * Time::DeltaTime(); }
+		if (IS_KEY_PRESSED(eKeyCode::A))	{ mPos.x -= mSpeed * Time::DeltaTime(); }
+		if (IS_KEY_PRESSED(eKeyCode::D))	{ mPos.x += mSpeed * Time::DeltaTime(); }
+
+		if (IS_KEY_DOWN(eKeyCode::W))			{ mpAnimator->Play(mAnimMoveUp, true);}
+		if (IS_KEY_DOWN(eKeyCode::S))			{ mpAnimator->Play(mAnimMoveDown, true); }
+		if (IS_KEY_DOWN(eKeyCode::A))			{ mpAnimator->Play(mAnimMoveLeft, true); }
+		if (IS_KEY_DOWN(eKeyCode::D))			{ mpAnimator->Play(mAnimMoveRight, true); }
+
+		if (IS_KEY_UP(eKeyCode::W))		{ mpAnimator->Play(mAnimIdle, true); }
+		if (IS_KEY_UP(eKeyCode::S))		{ mpAnimator->Play(mAnimIdle, true); }
+		if (IS_KEY_UP(eKeyCode::A))		{ mpAnimator->Play(mAnimIdle, true); }
+		if (IS_KEY_UP(eKeyCode::D))		{ mpAnimator->Play(mAnimIdle, true); }
+
 		if (IS_KEY_DOWN(eKeyCode::SPACE))
 		{
 			Missile* missile = ya::object::Instantiate<Missile>(eColliderLayer::PLAYER_PROJECTTILE);
@@ -98,8 +102,6 @@ namespace ya
 		//	static_cast<int>(mPos.x + mScale.x),
 		//	static_cast<int>(mPos.y + mScale.y)
 		//);
-
-		assert(mImage != nullptr);
 		//BitBlt(
 		//	hdc,
 		//	static_cast<int>(mPos.x),
@@ -147,4 +149,23 @@ namespace ya
 	{
 
 	}
+
+	void Player::WalkComplete()
+	{
+
+	}
+
+	void Player::createAnimation(const std::wstring& name, Vector2 leftTop, Vector2 size, Vector2 offset, UINT spriteLength, float duration)
+	{
+		mpAnimator->CreateAnimation(
+			name,
+			mpImage,
+			leftTop,
+			size,
+			offset,
+			spriteLength,
+			duration
+		);
+	}
+
 }

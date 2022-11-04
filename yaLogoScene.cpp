@@ -20,20 +20,11 @@ namespace ya
 	}
 	void LogoScene::Initialize()
 	{
-		//BgImageObject* bg = new BgImageObject(L"LogoBG.bmp");
-		//AddGameObject(bg, eColliderLayer::BACKGROUND);
-
 		ya::object::Instantiate<Player>(eColliderLayer::PLAYER);
 		ya::object::Instantiate<Monster>(eColliderLayer::MONSTER, Vector2(200.f, 300.f));
 		ya::object::Instantiate<Monster>(eColliderLayer::MONSTER, Vector2(500.f, 300.f));
-		//AddGameObject(new Monster(Vector2(200.f, 300.f)), eColliderLayer::MONSTER);
-		//AddGameObject(new Monster(Vector2(500.f, 300.f)), eColliderLayer::MONSTER);
 		CollisionManager::SetLayer(eColliderLayer::PLAYER, eColliderLayer::MONSTER, true);
 		CollisionManager::SetLayer(eColliderLayer::MONSTER, eColliderLayer::PLAYER_PROJECTTILE, true);
-		
-		
-		//Scene::Initialize();
-		//MeteoManager::GetInstance().Initialzie();
 	}
 	void LogoScene::Tick()
 	{

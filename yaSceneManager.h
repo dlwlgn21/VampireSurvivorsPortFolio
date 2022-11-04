@@ -13,8 +13,9 @@ namespace ya
 		static void Release();
 		static void ChangeSecne(eSceneType scene);
 		static void DestroyGameobject();
-		static Scene* GetCurrentScene() { return mCurrentScenes; }
-		static Scene* GetSpecifiedScene(eSceneType sceneType) { return mScenes[static_cast<UINT>(sceneType)];}
+		__forceinline static Scene* GetCurrentScene() { return mCurrentScenes; }
+		__forceinline static Scene* GetSpecifiedScene(eSceneType sceneType) { return mScenes[static_cast<UINT>(sceneType)];}
+		__forceinline static void SetCurrScene(Scene* scene) { mCurrentScenes = scene; };
 
 	private:
 		static Scene* mScenes[static_cast<UINT>(eSceneType::COUNT)];

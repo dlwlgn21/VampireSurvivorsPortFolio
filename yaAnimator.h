@@ -24,7 +24,7 @@ namespace ya
 		};
 		
 		Animator();
-		~Animator();
+		virtual ~Animator();
 
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
@@ -33,7 +33,7 @@ namespace ya
 		void CreateAnimation(
 			const std::wstring& name, Image* image, Vector2 leftTop, 
 			Vector2 size, Vector2 offset, 
-			float colLength, UINT spriteLength, float duration,
+			UINT spriteLength, float duration,
 			bool bIsAffectedCamera = true);
 		void Play(const std::wstring& name, bool bIsLooping);
 

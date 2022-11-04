@@ -1,12 +1,14 @@
 #include <cassert>
 #include "yaGameObject.h"
 #include "yaScene.h"
-
+#include "yaSceneManager.h"
 
 namespace ya
 {
 	Scene::Scene()
 	{
+		SceneManager::SetCurrScene(this);
+		mObjects.reserve(MAX_COLLIDER_LAYER);
 		mObjects.resize(MAX_COLLIDER_LAYER);
 		for (int i = 0; i < MAX_COLLIDER_LAYER; ++i)
 		{
